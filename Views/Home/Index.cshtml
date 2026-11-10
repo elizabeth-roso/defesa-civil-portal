@@ -1,4 +1,5 @@
 ﻿@using portal_defesa_civil.Models;
+@using portal_defesa_civil.DTOs;
 @model HomeViewModel;
 
 <div class="container">
@@ -66,16 +67,8 @@
 
 <div class="container">
     <div class="row">
-        <div class="col-md-5">
-            <img src="@Model.NoticiasPrincipais[0].Imagem" class="img-fluid"/>
-            <p> @Model.NoticiasPrincipais[0].Titulo </p>
-        </div>
-        @for (int i = 1; i < Model.NoticiasPrincipais.Count; i++)
+       @foreach(var noticia in Model.ListaNoticiasPrincipais)
         {
-            <div class="col-md-4">
-                <img src="@Model.NoticiasPrincipais[i].Imagem" class="img-fluid"/>
-                <p> @Model.NoticiasPrincipais[i].Titulo </p>
-            </div>
         }
     </div>
 </div> 

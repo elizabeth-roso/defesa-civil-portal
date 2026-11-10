@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components.Forms;
+using portal_defesa_civil.DTOs;
 
 namespace portal_defesa_civil.Models
 {
@@ -16,6 +17,8 @@ namespace portal_defesa_civil.Models
         public string Resposta { get; set; } = "Atua diretamente no momento do desastre, prestando socorro imediato, salvamento e assistência humanitária (abrigos, alimentação e atenção médica)";
 
         public string Recuperacao { get; set; } = " Ajuda a reconstruir e reabilitar as áreas afetadas para que a comunidade retorne à rotina o mais rápido possível";
+
+        public List<NoticiaDTO> ListaNoticiasPrincipais { get; set; } = new List<NoticiaDTO>();
 
     }
 }
