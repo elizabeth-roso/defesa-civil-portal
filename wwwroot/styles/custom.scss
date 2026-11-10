@@ -1,0 +1,14 @@
+﻿@import "../lib/bootstrap/scss/scss/functions";
+
+$secondary: #d9d9d9; 
+$body-bg: #f8f9fa;
+
+@import "../lib/bootstrap/scss/scss/variables";
+@import "../lib/bootstrap/scss/scss/mixins";
+
+@import "../lib/bootstrap/scss/scss/bootstrap";
+
+.botao-redirecionamento {
+    background-color: $secondary;
+    padding: 10px 20px;
+}

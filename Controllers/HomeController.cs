@@ -8,7 +8,8 @@ namespace portal_defesa_civil.Controllers
     {
         public IActionResult Index()
         {
-            return View();
+            HomeViewModel model = new HomeViewModel();
+            return View(model);
         }
 
         public IActionResult Privacy()

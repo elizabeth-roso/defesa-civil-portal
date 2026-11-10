@@ -1,8 +1,83 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
-}
+﻿@using portal_defesa_civil.Models;
+@model HomeViewModel;
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="container">
+    <div class="row" >
+        <div class="col-md-8">
+            <h1>DEFESA CIVIL</h1>
+
+            <p>
+                @Model.TextoPrincipal
+            </p>
+
+            <ul> 
+                <li>
+                    <span class="fw-bold"> Prevenção: </span> @Model.Prevencao
+                </li>
+
+                <li>
+                    <span class="fw-bold"> Mitigação: </span> @Model.Mitigacao
+                </li>
+
+                <li>
+                    <span class="fw-bold"> Preparação: </span> @Model.Preparacao
+                </li>
+
+                <li>
+                    <span class="fw-bold"> Resposta: </span> @Model.Resposta
+                </li>
+
+                <li>
+                    <span class="fw-bold"> Recuperação: </span> @Model.Recuperacao
+                </li>
+            </ul>
+
+        </div>
+        <div class="col-md-3 align-self-center">
+            <img width="400" height="330" src="~/img/defesa_civil_pg.png" class="border rounded-4"/>
+        </div>
+
+        
+
+    </div>
 </div>
+
+@{
+    var botoes = new List<string[]>
+    {
+        new string[] {"Previsão do Tempo", "https://www.climatempo.com.br/previsao-do-tempo/cidade/523/praiagrande-sp" },
+        new string[] {"Receba Alertas", "https://www.gov.br/pt-br/servicos/solicitar-cadastro-para-recebimento-de-avisos-e-alertas-de-desastres" },
+        new string[] {"Orientações", "https://www.gov.br/mdr/pt-br/assuntos/protecao-e-defesa-civil/saiba-como-agir" },
+        new string[] {"Terminologia", " https://educacao.cemaden.gov.br/glossario/"},
+        new string[] {"Documentações", "https://dadosabertos.praiagrande.sp.gov.br/geonetwork/srv/por/catalog.search#/metadata/67179132-5dbf-4d3d-bfc1-198161511db0"},
+        new string[] {"Áreas de Risco", "https://dadosabertos.praiagrande.sp.gov.br/geonetwork/srv/por/catalog.search#/map"}
+    };
+
+}
+<div class="container">
+    <h2> ACESSO RÁPIDO </h2>
+    <div class="d-flex flex-wrap gap-2 justify-content-center">
+        @foreach (var botao in botoes)
+        {
+                <a class="btn botao-redirecionamento" href="@botao[1]" target="_blank"> <span class="fw-bold">@botao[0]</span></a>
+        }
+    </div>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-5">
+            <img src="@Model.NoticiasPrincipais[0].Imagem" class="img-fluid"/>
+            <p> @Model.NoticiasPrincipais[0].Titulo </p>
+        </div>
+        @for (int i = 1; i < Model.NoticiasPrincipais.Count; i++)
+        {
+            <div class="col-md-4">
+                <img src="@Model.NoticiasPrincipais[i].Imagem" class="img-fluid"/>
+                <p> @Model.NoticiasPrincipais[i].Titulo </p>
+            </div>
+        }
+    </div>
+</div> 
+
+
