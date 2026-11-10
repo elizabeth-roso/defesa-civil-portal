@@ -1,0 +1,63 @@
+﻿
+# ==============================
+# Visual Studio
+# ==============================
+.vs/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# ==============================
+# Build - .NET
+# ==============================
+[Bb]in/
+[Oo]bj/
+[Dd]ebug/
+[Rr]elease/
+x64/
+x86/
+[Aa]rtifacts/
+
+# ==============================
+# NuGet
+# ==============================
+*.nupkg
+*.snupkg
+.nuget/
+
+# ==============================
+# Visual Studio extensions
+# ==============================
+_ReSharper*/
+*.[Rr]e[Ss]harper
+*.DotSettings.user
+
+# ==============================
+# Logs e arquivos temporários
+# ==============================
+*.log
+*.tmp
+*.temp
+
+# ==============================
+# Banco de dados local
+# ==============================
+*.mdf
+*.ldf
+*.sqlite
+*.db
+
+# ==============================
+# Configurações locais e segredos
+# ==============================
+appsettings.Development.json
+appsettings.Local.json
+secrets.json
+
+# ==============================
+# Sistema operacional
+# ==============================
+.DS_Store
+Thumbs.db
+desktop.ini
