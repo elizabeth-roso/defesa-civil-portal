@@ -1,0 +1,33 @@
+﻿@using portal_defesa_civil.Models;
+@using portal_defesa_civil.DTOs;
+@model NoticiaDTO;
+
+<h1> @Model.Titulo </h1>
+<h2> @Model.Subtitulo </h2>
+
+<span> @Model.Tags </span>
+
+<p> Criada em: @Model.DataPublicacao. Última atualização: @Model.DataAlteracao </p> 
+
+<p> Por: </p>
+@foreach(var autor in Model.Autores)
+{
+    <p> @autor </p>
+}
+
+@foreach(var categoria in Model.Categorias){
+    <p> @categoria </p>
+}
+
+@foreach(var publicacao in Model.Publicacoes){
+    <p> @publicacao </p>
+}
+
+
+<div class="conteudo">
+    @Html.Raw(Model.Conteudo)
+</div>
+
+<div>
+    <img />
+</div>

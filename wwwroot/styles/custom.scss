@@ -1,14 +1,74 @@
-﻿@import "../lib/bootstrap/scss/scss/functions";
+﻿/*  imports */
 
-$secondary: #d9d9d9; 
-$body-bg: #f8f9fa;
-
+@use 'sass:color';
+@use 'sass:math';
+@import "../lib/bootstrap/scss/scss/functions";
 @import "../lib/bootstrap/scss/scss/variables";
 @import "../lib/bootstrap/scss/scss/mixins";
-
 @import "../lib/bootstrap/scss/scss/bootstrap";
 
+/* funções */
+
+@function to-rgb($color) {
+    @return color.red($color), color.green($color), color.blue($color);
+}
+
+/* variáveis */
+
+$tema-acessibilidade: false;
+$fundo: if($tema-acessibilidade, #000000, #ffffff);
+$secundaria: if($tema-acessibilidade, #000000, #d9d9d9);
+$primaria: if($tema-acessibilidade, #ffffff, #EF7E32);
+$terciaria: if($tema-acessibilidade, #7fffff, #393C71);
+
+/* classes */
+
 .botao-redirecionamento {
-    background-color: $secondary;
+    background-color: $secundaria;
     padding: 10px 20px;
+
+    &:hover {
+        background-color: $primaria;
+        transition: transform 0.2s ease-in;
+        color: white;
+    }
+}
+
+.titulo {
+    text-shadow: 4px 2px 2px rgb(128, 128, 128, 0.2);
+
+    &--principal {
+        @extend .titulo;
+        color: $primaria;
+        font-weight: 900;
+        line-height: 1.2;
+    }
+
+    &--secundario {
+        @extend .titulo;
+        color: $secondary;
+        font-weight: 700;
+        filter: brightness(0.3);
+    }
+
+    &--noticia {
+        color: #000000;
+    }
+}
+
+%efeito-hover {
+    transition: transform 0.35s ease-in-out;
+
+    &:hover {
+        transform: scale(1.02);
+    }
+}
+
+.card-noticia {
+    @extend %efeito-hover;
+
+    &--pequena:hover {
+        @extend .card-noticia;
+        box-shadow: 0 4px 6px rgba(0, 0, 100, 0.2);
+    }
 }

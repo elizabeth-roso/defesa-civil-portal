@@ -2,15 +2,16 @@
 @using portal_defesa_civil.DTOs;
 @model HomeViewModel;
 
+<!--  precisamos escolher as fontes no google fonts e icons  -->
+<!--  manter o bootstrap para componentes de estrutura, grid e flex, utilitários  -->
+<!--  mas manter sass para visual de estilos e cores  -->
+<!--  estou achando que no 90% de zoom do navegador fica mais bonito...  --> 
+
 <div class="container">
     <div class="row" >
-        <div class="col-md-8">
-            <h1>DEFESA CIVIL</h1>
-
-            <p>
-                @Model.TextoPrincipal
-            </p>
-
+        <div class="col-lg-8">
+            <h1 class="fw-bold titulo--principal">DEFESA CIVIL</h1>
+            <p> @Model.TextoPrincipal </p>
             <ul> 
                 <li>
                     <span class="fw-bold"> Prevenção: </span> @Model.Prevencao
@@ -34,11 +35,9 @@
             </ul>
 
         </div>
-        <div class="col-md-3 align-self-center">
+        <div class="col-lg-3 align-self-center">
             <img width="400" height="330" src="~/img/defesa_civil_pg.png" class="border rounded-4"/>
         </div>
-
-        
 
     </div>
 </div>
@@ -53,24 +52,61 @@
         new string[] {"Documentações", "https://dadosabertos.praiagrande.sp.gov.br/geonetwork/srv/por/catalog.search#/metadata/67179132-5dbf-4d3d-bfc1-198161511db0"},
         new string[] {"Áreas de Risco", "https://dadosabertos.praiagrande.sp.gov.br/geonetwork/srv/por/catalog.search#/map"}
     };
-
+    int i = 0;
 }
-<div class="container">
-    <h2> ACESSO RÁPIDO </h2>
+
+<div class="container my-4 p-2">
+    <h2 class="text-uppercase fs-3 titulo--secundario mb-4"> Acesso Rápido </h2>
     <div class="d-flex flex-wrap gap-2 justify-content-center">
         @foreach (var botao in botoes)
         {
-                <a class="btn botao-redirecionamento" href="@botao[1]" target="_blank"> <span class="fw-bold">@botao[0]</span></a>
+            <a class="btn botao-redirecionamento" href="@botao[1]" target="_blank"> <span class="fw-bold">@botao[0]</span></a>
         }
     </div>
 </div>
 
 <div class="container">
+    <div class="d-flex align-items-center">
+        <h2 class="text-uppercase fs-3 titulo--principal">Notícias da Defesa Civil</h2>
+    </div>
     <div class="row">
-       @foreach(var noticia in Model.ListaNoticiasPrincipais)
-        {
-        }
+        <div class="col-md-7 d-flex align-items-center">
+            <a asp-controller="Home" asp-action="Noticia" asp-route-id="@Model.ListaNoticiasPrincipais.First().Id" class="text-decoration-none">
+                <div class="card-noticia border-end border-2 rounded-3 p-2">
+                    <div class="position-relative d-inline-block">
+                        <img src="~/img/teste@(i++).png" width="635" height="373" class="rounded rounded-3"/>
+                        <span class="position-absolute bottom-0 start-0 badge bg-white opacity-75 text-dark px-3 py-2 text-small">
+                             @Model.ListaNoticiasPrincipais.First().DataPublicacao
+                        </span>
+                        <span class="position-absolute top-0 end-0 badge bg-white opacity-75 text-dark px-3 py-2 text-small">
+                             @foreach (var autor in Model.ListaNoticiasPrincipais.First().Autores){
+                                @if(autor != null) { <p>@autor</p> }
+                              }
+                        </span>
+                    </div>
+                    <p class="fw-bold fs-4 titulo--noticia">@Model.ListaNoticiasPrincipais.First().Titulo</p>
+                    <p class="text-dark">@Model.ListaNoticiasPrincipais.First().Subtitulo</p>             
+                </div>
+            </a>
+        </div>    
+        
+        <div class="col-md-5">
+            @foreach(NoticiaDTO noticia in Model.ListaNoticiasPrincipais.Skip(1))
+            {
+                <a asp-controller="Home" asp-action="Noticia" asp-route-id="@noticia.Id" class="flex-fill text-decoration-none">
+                    <div class="d-flex flex-row gap-2 justify-content-start align-items-center my-3 border-end border-2 rounded-3 card-noticia card-noticia--pequena">
+                        @* <img onclick="location.href='@noticia.Url'" src="@noticia.Fotos[0].Caminho"/> tem que procurar entre a lista de fotos aquele que tem nome igual ao Noticia.ImagemPrincipal *@
+                        <div class="position-relative d-inline-block">
+                                <img src="~/img/teste@(i++).png" width="194" height="115" class="rounded rounded-3"/>
+                                   
+                            <span class="position-absolute bottom-0 start-0 badge bg-white opacity-75 text-dark px-3 py-2 text-small">
+                                   @noticia.DataPublicacao
+                             </span>
+                        </div>
+                        <p class="fw-bold titulo--noticia p-2" >@noticia.Titulo</p>
+                    </div>
+                </a>
+            }
+        </div>
     </div>
 </div> 
-
-

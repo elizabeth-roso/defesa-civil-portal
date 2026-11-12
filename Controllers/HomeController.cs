@@ -1,8 +1,9 @@
 using Microsoft.AspNetCore.Mvc;
+using portal_defesa_civil.DTOs;
 using portal_defesa_civil.Models;
 using System.Diagnostics;
 using System.Net.Http.Json;
-using portal_defesa_civil.DTOs;
+using System.Text.Json;
 
 namespace portal_defesa_civil.Controllers
 {
@@ -11,12 +12,13 @@ namespace portal_defesa_civil.Controllers
         private async Task<List<NoticiaDTO>> GetNoticiasMaisRecentes(int pageSize)
         {
             HttpClient client = new HttpClient();
-            string baseUrl = "https://d-api.praiagrande.sp.gov.br/api/noticias";
+            string baseUrl = "https://t-api.praiagrande.sp.gov.br/api/noticias";
             var items = await BuscarEExibirPaginadoAsync(client, $"{baseUrl}/publicadas?pageSize={pageSize}");
+            // teria que pegar tipo quando categoria = "defesa civil". será que a api retorna com data decrescente?
             return items;
         }
 
-        async private Task<List<NoticiaDTO>> BuscarEExibirPaginadoAsync(HttpClient cliente, string urlBaseDaBusca)
+        private async Task<List<NoticiaDTO>> BuscarEExibirPaginadoAsync(HttpClient cliente, string urlBaseDaBusca)
         {
             NoticiaPagedResultDTO? resultado = null;
             int nextPage = 1;
@@ -30,6 +32,11 @@ namespace portal_defesa_civil.Controllers
                 resposta.EnsureSuccessStatusCode();
 
                 resultado = await resposta.Content.ReadFromJsonAsync<NoticiaPagedResultDTO>();
+                string jsonFormatado = JsonSerializer.Serialize(resultado, new JsonSerializerOptions
+                {
+                    WriteIndented = true
+                });
+                Console.WriteLine(jsonFormatado);
 
                 if (resultado != null)
                 {
@@ -42,11 +49,25 @@ namespace portal_defesa_civil.Controllers
             return new List<NoticiaDTO>();
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
             HomeViewModel model = new HomeViewModel();
             model.ListaNoticiasPrincipais = await GetNoticiasMaisRecentes(5);
             return View(model);
+        }
+
+        public async Task<IActionResult> Noticia(int id)
+        {
+            HttpClient client = new HttpClient();
+            string baseUrl = "https://t-api.praiagrande.sp.gov.br/api/noticias";
+            var resposta = await client.GetAsync($"{baseUrl}/{id}");
+            resposta.EnsureSuccessStatusCode();
+            var noticia = await resposta.Content.ReadFromJsonAsync<NoticiaDTO>();
+            if (noticia == null)
+            {
+                return NotFound();
+            }
+            return View(noticia);
         }
 
         public IActionResult Privacy()
