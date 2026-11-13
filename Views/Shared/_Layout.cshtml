@@ -12,24 +12,21 @@
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">portal_defesa_civil</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3 justify-content-evenly">
+           <div class="container navegacao d-flex align-items-center  m-0 p-0">
+                <a class="navbar-brand h-100 d-flex align-items-center" asp-area="" asp-controller="Home" asp-action="Index"> 
+                    <img src="~/img/brasao_prefeirura_pg.png" alt="Brasão da Prefeitura" class="mh-100 w-auto object-fit-contain"  style="max-height: 100%;"/>
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
-                    </ul>
+                <div class="navbar-collapse collapse d-sm-flex justify-content-center text-center">
+                    <h1 class="fs-5 fs-md-4 m-0 text-wrap titulo--principal"> PORTAL DA DEFESA CIVIL DE PRAIA GRANDE </h1>
                 </div>
-            </div>
+                <a class="navbar-brand h-100 d-flex align-items-center m-0" asp-area="" asp-controller="Home" asp-action="Index">
+                    <img src="~/img/brasao_defesa_civil_federal.png" alt="Brasão Defesa Civil Federal" class="mh-100 w-auto object-fit-contain" style="max-height: 60px;" />
+                </a>
+           </div> 
         </nav>
     </header>
     <div class="container">

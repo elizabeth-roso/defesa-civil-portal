@@ -2,3 +2,10 @@
 // for details on configuring this project to bundle and minify static web assets.
 
 // Write your JavaScript code.
+
+let temaAcessibilidade = true;
+
+function alternarAcessibilidade() {
+  temaAcessibilidade = !temaAcessibilidade;
+  document.documentElement.setAttribute('data-acessibilidade', temaAcessibilidade);
+}

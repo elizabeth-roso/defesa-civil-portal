@@ -18,7 +18,7 @@ namespace portal_defesa_civil.Models
 
         public string Recuperacao { get; set; } = " Ajuda a reconstruir e reabilitar as áreas afetadas para que a comunidade retorne à rotina o mais rápido possível";
 
-        public List<NoticiaDTO> ListaNoticiasPrincipais { get; set; } = new List<NoticiaDTO>();
+        public NoticiaPagedResultDTO ListaNoticiasPrincipais { get; set; }
 
     }
 }

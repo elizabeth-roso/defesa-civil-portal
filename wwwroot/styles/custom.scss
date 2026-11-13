@@ -1,58 +1,85 @@
 ﻿/*  imports */
-
 @use 'sass:color';
 @use 'sass:math';
 @import "../lib/bootstrap/scss/scss/functions";
 @import "../lib/bootstrap/scss/scss/variables";
 @import "../lib/bootstrap/scss/scss/mixins";
 @import "../lib/bootstrap/scss/scss/bootstrap";
+@import url('https://fonts.googleapis.com/css2?family=Quantico:ital,wght@0,400;0,700;1,400;1,700&display=swap');
 
 /* funções */
-
 @function to-rgb($color) {
     @return color.red($color), color.green($color), color.blue($color);
 }
 
-/* variáveis */
+/* variáveis DINÂMICAS */
+:root {
+    --fundo: #EDEFF2;
+    --secundaria: #d9d9d9;
+    --primaria: #EF7E32;
+    --terciaria: #393C71;
+    --primaria-rgb: #{to-rgb(#EF7E32)};
+}
 
-$tema-acessibilidade: false;
-$fundo: if($tema-acessibilidade, #000000, #ffffff);
-$secundaria: if($tema-acessibilidade, #000000, #d9d9d9);
-$primaria: if($tema-acessibilidade, #ffffff, #EF7E32);
-$terciaria: if($tema-acessibilidade, #7fffff, #393C71);
+[data-acessibilidade="true"] {
+    --fundo: #000000;
+    --secundaria: #000000;
+    --primaria: #ffffff;
+    --terciaria: #7fffff;
+    --primaria-rgb: #{to-rgb(#ffffff)};
+}
 
 /* classes */
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    font-size: 15px;
+    scroll-behavior: smooth;
+}
+
+body {
+    line-height: 1.5;
+    min-height: 100vh;
+    background-color: var(--fundo);
+    color: var(---primaria);
+}
 
 .botao-redirecionamento {
-    background-color: $secundaria;
+    background-color: var(--secundaria);
     padding: 10px 20px;
 
     &:hover {
-        background-color: $primaria;
+        background-color: var(--primaria);
         transition: transform 0.2s ease-in;
         color: white;
     }
 }
 
 .titulo {
-    text-shadow: 4px 2px 2px rgb(128, 128, 128, 0.2);
 
     &--principal {
         @extend .titulo;
-        color: $primaria;
+        display: inline-block; 
+        transform: scaleX(1.15);
+        transform-origin: left;
+        color: var(--primaria);
         font-weight: 900;
         line-height: 1.2;
     }
 
     &--secundario {
         @extend .titulo;
-        color: $secondary;
+        color: var(--secundaria);
         font-weight: 700;
         filter: brightness(0.3);
     }
 
     &--noticia {
-        color: #000000;
+        color: #000000; // Considere usar var(--primaria) ou criar --texto-noticia para não sumir no fundo preto
     }
 }
 
@@ -71,4 +98,33 @@ $terciaria: if($tema-acessibilidade, #7fffff, #393C71);
         @extend .card-noticia;
         box-shadow: 0 4px 6px rgba(0, 0, 100, 0.2);
     }
+}
+
+.navegacao {
+    height: 100px;
+}
+
+/* fonte título */
+.quantico-regular {
+    font-family: "Quantico", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+.quantico-bold {
+    font-family: "Quantico", sans-serif;
+    font-weight: 700;
+    font-style: normal;
+}
+
+.quantico-regular-italic {
+    font-family: "Quantico", sans-serif;
+    font-weight: 400;
+    font-style: italic;
+}
+
+.quantico-bold-italic {
+    font-family: "Quantico", sans-serif;
+    font-weight: 700;
+    font-style: italic;
 }
